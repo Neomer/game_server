@@ -7,13 +7,13 @@
 
 #include "json.hpp"
 
-class Client;
+class TcpSocket;
 
 class IClientDataReadyListener
 {
 public:
 
-    virtual void onDataReady(Client *client, nlohmann::json &json) = 0;
+    virtual void onDataReady(TcpSocket *client, nlohmann::json &json) = 0;
 };
 
 

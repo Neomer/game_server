@@ -5,13 +5,13 @@
 #ifndef WEBSOCKETS_ICONNECTIONACCEPTEDLISTENER_H
 #define WEBSOCKETS_ICONNECTIONACCEPTEDLISTENER_H
 
-class Client;
+class TcpSocket;
 
 class IConnectionAcceptedListener
 {
 public:
 
-    virtual void onConnectionAccepted(Client *client) = 0;
+    virtual void onConnectionAccepted(TcpSocket *client) = 0;
 };
 
 

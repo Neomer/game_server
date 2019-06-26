@@ -5,13 +5,13 @@
 #ifndef WEBSOCKETS_ICLIENTCONNECTIONCLOSEDLISTENER_H
 #define WEBSOCKETS_ICLIENTCONNECTIONCLOSEDLISTENER_H
 
-class Client;
+class TcpSocket;
 
 class IClientConnectionClosedListener
 {
 public:
 
-    virtual void onConnectionClosed(Client *client) = 0;
+    virtual void onConnectionClosed(TcpSocket *client) = 0;
 };
 
 

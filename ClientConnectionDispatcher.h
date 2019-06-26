@@ -20,15 +20,17 @@ public:
 
     ~ClientConnectionDispatcher();
 
-    void onConnectionAccepted(Client *client) override;
+    void close();
 
-    void onDataReady(Client *client, nlohmann::json &json) override;
+    void onConnectionAccepted(TcpSocket *client) override;
 
-    void onConnectionClosed(Client *client) override;
+    void onDataReady(TcpSocket *client, nlohmann::json &json) override;
+
+    void onConnectionClosed(TcpSocket *client) override;
 
 private:
     std::mutex _clientsVectorMutex;
-    std::vector<Client *> _clients;
+    std::vector<TcpSocket *> _clients;
 };
 
 

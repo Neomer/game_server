@@ -1,14 +1,11 @@
 //
 // Created by kir on 24.06.19.
 //
-
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <functional>
 #include <iostream>
+#include "Sockets.h"
 #include "Server.h"
-#include "Client.h"
+#include "TcpSocket.h"
 #include "IConnectionAcceptedListener.h"
 
 Server::Server() :
@@ -43,7 +40,7 @@ void Server::connectionAwaitingProc()
     while (_listeningRun) {
         auto socket = accept(_socketDescriptor, NULL, NULL);
         if (_connectionAcceptedListener != nullptr && socket >= 0) {
-            _connectionAcceptedListener->onConnectionAccepted(new Client(socket));
+            _connectionAcceptedListener->onConnectionAccepted(new TcpSocket(socket));
         }
     }
     std::cout << "Server::connectionAwaitingProc() - Thread finished" << std::endl;
