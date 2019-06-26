@@ -6,19 +6,17 @@
 #define WEBSOCKETS_ROLE_H
 
 #include <string>
+#include "../json.hpp"
 
 class Role
 {
 public:
     Role();
 
-    const std::string &getName() const;
+    virtual const std::string &getName() const = 0;
 
-    void setName(const std::string &name);
+    virtual const std::string &getDescription() const = 0;
 
-    const std::string &getDescription() const;
-
-    void setDescription(const std::string &description);
 
 private:
     std::string _name, _description;

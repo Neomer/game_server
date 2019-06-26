@@ -6380,7 +6380,7 @@ class lexer
         // changed if minus sign, decimal point or exponent is read
         token_type number_type = token_type::value_unsigned;
 
-        // state (init): we just found out we need to scan a number
+        // state (load): we just found out we need to scan a number
         switch (current)
         {
             case '-':

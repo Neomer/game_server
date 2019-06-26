@@ -2,6 +2,11 @@
 #include "Server.h"
 #include "ClientConnectionDispatcher.h"
 #include "Sockets.h"
+#include "Logger.h"
+
+#include "game/Card.h"
+#include "game/CardMetadataProvider.h"
+#include "game/HandTakableCard.h"
 
 int main()
 {
@@ -11,6 +16,8 @@ int main()
         throw std::runtime_error("Winsock initialization failed!");
     }
 #endif
+
+    CardMetadataProvider::getInstance().init();
 
     ClientConnectionDispatcher dispatcher;
 
