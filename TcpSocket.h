@@ -25,6 +25,8 @@ public:
 
     virtual void write(nlohmann::json &json);
 
+    void close();
+
     void setOnDataReadyListener(IClientDataReadyListener *listener);
 
     void setOnConnectionClosedListener(IClientConnectionClosedListener *listener);

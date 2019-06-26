@@ -7,6 +7,7 @@
 #include "Server.h"
 #include "TcpSocket.h"
 #include "IConnectionAcceptedListener.h"
+#include "Logger.h"
 
 Server::Server() :
     _listeningRun{ false },
@@ -17,7 +18,7 @@ Server::Server() :
 
 void Server::listen(std::string_view ip, uint16_t port)
 {
-    std::cout << "Server::listen()" << std::endl;
+    Logger::getInstace().log("Server::listen()");
     _socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in addr;
@@ -35,15 +36,17 @@ void Server::listen(std::string_view ip, uint16_t port)
 
 void Server::connectionAwaitingProc()
 {
-    std::cout << "Server::connectionAwaitingProc() - start thread..." << std::endl;
+    Logger::getInstace().log("Server::connectionAwaitingProc() - start thread...");
     ::listen(_socketDescriptor, 10);
+    sockaddr addr;
+    socklen_t len;
     while (_listeningRun) {
-        auto socket = accept(_socketDescriptor, NULL, NULL);
+        auto socket = accept(_socketDescriptor, &addr, &len);
         if (_connectionAcceptedListener != nullptr && socket >= 0) {
             _connectionAcceptedListener->onConnectionAccepted(new TcpSocket(socket));
         }
     }
-    std::cout << "Server::connectionAwaitingProc() - Thread finished" << std::endl;
+    Logger::getInstace().log("Server::connectionAwaitingProc() - Thread finished");
 }
 
 void Server::setOnConnectionAcceptedListener(IConnectionAcceptedListener *listener)
