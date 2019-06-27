@@ -9,3 +9,7 @@ Observer::Observer(TcpSocket *socket) :
 {
 
 }
+
+void Observer::send(Package *package) {
+    _socket->write(package);
+}

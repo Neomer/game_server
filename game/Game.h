@@ -12,9 +12,15 @@
 #include "Observer.h"
 #include "../network/Server.h"
 #include "../network/IConnectionAcceptedListener.h"
+#include "../network/IClientConnectionClosedListener.h"
+#include "../network/IClientDataReadyListener.h"
 #include "GameConfig.h"
 
-class Game : public IConnectionAcceptedListener {
+class Game :
+        public IConnectionAcceptedListener,
+        public IClientConnectionClosedListener,
+        public IClientDataReadyListener
+{
 public:
     explicit Game(GameConfig &&gameConfig);
 
@@ -25,6 +31,10 @@ public:
     Player *createPlayer();
 
     void onConnectionAccepted(const Server *server, TcpSocket *client) override;
+
+    void onConnectionClosed(TcpSocket *client) override;
+
+    void onDataReady(TcpSocket *client, nlohmann::json &json) override;
 
     const std::vector<Player *> &getPlayers() const;
 
@@ -38,6 +48,10 @@ private:
     Server *_playersServer, *_observersServer;
 
     GameConfig _gameConfig;
+
+    void sendGameInfo();
+
+    void sendPackageToObservers(Package *package);
 };
 
 

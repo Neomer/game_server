@@ -29,7 +29,7 @@ void Logger::log(std::thread::id threadId, std::string_view text)
 {
     std::lock_guard lock(_queueMutex);
     _messageQueue.push(Msg{ threadId, std::string{text} });
-    _queueCondVar.notify_one();
+    //_queueCondVar.notify_one();
 }
 
 void Logger::log(std::string_view text)
@@ -40,11 +40,11 @@ void Logger::log(std::string_view text)
 
 void Logger::writeProc()
 {
-    std::mutex cvMtx;
-    std::unique_lock lock(cvMtx);
+    //std::mutex cvMtx;
+    //std::unique_lock lock(cvMtx);
 
     while (_run.load()) {
-        _queueCondVar.wait(lock);
+        //_queueCondVar.wait(lock);
         if (!_messageQueue.empty()) {
             std::lock_guard guard(_queueMutex);
             _messageCopyQueue.swap(_messageQueue);
@@ -54,5 +54,6 @@ void Logger::writeProc()
             std::cout << '[' << std::hex << std::setw(4) << msg.ThreadId << "] " << msg.Text << std::endl;
             _messageCopyQueue.pop();
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }

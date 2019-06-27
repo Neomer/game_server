@@ -16,6 +16,8 @@ class IClientDataReadyListener;
 
 class IClientConnectionClosedListener;
 
+class Package;
+
 class TcpSocket
 {
 public:
@@ -24,6 +26,8 @@ public:
     virtual ~TcpSocket();
 
     virtual void write(nlohmann::json &json);
+
+    virtual void write(Package *package);
 
     void close();
 

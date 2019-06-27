@@ -9,6 +9,8 @@
 #include "IConnectionAcceptedListener.h"
 #include "../Logger.h"
 
+using namespace std::string_literals;
+
 Server::Server() :
     _listeningRun{ false },
     _connectionAcceptedListener{ nullptr }
@@ -38,11 +40,9 @@ void Server::connectionAwaitingProc()
 {
     Logger::getInstace().log("Server::connectionAwaitingProc() - start thread...");
     ::listen(_socketDescriptor, 10);
-    sockaddr addr;
-    socklen_t len;
     while (_listeningRun) {
-        auto socket = accept(_socketDescriptor, &addr, &len);
-        if (_connectionAcceptedListener != nullptr && socket >= 0) {
+        auto socket = accept(_socketDescriptor, nullptr, nullptr);
+        if (_connectionAcceptedListener != nullptr && socket > 0 && socket != INVALID_SOCKET) {
             _connectionAcceptedListener->onConnectionAccepted(this, createSocket(socket));
         }
     }

@@ -13,25 +13,30 @@ int main()
         throw std::runtime_error("Winsock initialization failed!");
     }
 #endif
-    // Инициализируем метаданные карт
-    CardMetadataProvider::getInstance().init();
 
-    GameConfig cfg;
-    cfg.setGameKey("hello world");
-    cfg.setModeratorKey("god mode");
-    cfg.setMaxPlayersCount(3);
+    try {
+        // Инициализируем метаданные карт
+        CardMetadataProvider::getInstance().init();
 
-    Game game(std::move(cfg));
-    game.begin();
+        GameConfig cfg;
+        cfg.setGameKey("hello world");
+        cfg.setModeratorKey("god mode");
+        cfg.setMaxPlayersCount(3);
 
-    char cmd;
-    while (true)
-    {
-        std::cin >> cmd;
-        std::cout << cmd  << std::endl;
-        if (cmd == 'q') {
-            break;
+        Game game(std::move(cfg));
+        game.begin();
+
+        char cmd;
+        while (true)
+        {
+            std::cin >> cmd;
+            std::cout << cmd  << std::endl;
+            if (cmd == 'q') {
+                break;
+            }
         }
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
     }
 
 #ifdef _WIN32

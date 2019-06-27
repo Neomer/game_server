@@ -7,9 +7,13 @@
 
 #include "../network/TcpSocket.h"
 
+class Package;
+
 class Observer {
 public:
     explicit Observer(TcpSocket *socket);
+
+    void send(Package *package);
 
 private:
     TcpSocket *_socket;

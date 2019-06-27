@@ -14,6 +14,7 @@
 #include "IClientDataReadyListener.h"
 #include "IClientConnectionClosedListener.h"
 #include "../Logger.h"
+#include "packages/Package.h"
 
 #define BUFFER_SIZE     1024
 
@@ -146,5 +147,16 @@ void TcpSocket::close()
     if (_writeThread.joinable()) {
         _writeThread.join();
     }
+}
+
+void TcpSocket::write(Package *package) {
+    if (package == nullptr) {
+        return;
+    }
+    nlohmann::json json;
+    package->compile(json);
+    write(json);
+
+    delete package;
 }
 
