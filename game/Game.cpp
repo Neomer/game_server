@@ -5,12 +5,15 @@
 #include "Game.h"
 #include "../Logger.h"
 #include "../network/WebSocketServer.h"
+#include "../network/packages/GameInfoPackage.h"
 
 Game::Game(GameConfig &&gameConfig) :
     _gameConfig{ std::move(gameConfig) },
     _observersServer{ new WebSocketServer{} },
     _playersServer{ new Server{} }
 {
+    _playersServer->setOnConnectionAcceptedListener(this);
+    _observersServer->setOnConnectionAcceptedListener(this);
 
 }
 
@@ -34,15 +37,14 @@ void Game::onConnectionAccepted(const Server *server, TcpSocket *client) {
     } else if (server == _observersServer) {
         Logger::getInstace().log("New observer joined!");
         auto observer = new Observer(client);
+        client->setOnDataReadyListener(this);
+        client->setOnConnectionClosedListener(this);
         _observers.push_back(observer);
     }
 }
 
 void Game::begin() {
-    _playersServer->setOnConnectionAcceptedListener(this);
     _playersServer->listen("0.0.0.0", 11556);
-
-    _observersServer->setOnConnectionAcceptedListener(this);
     _observersServer->listen("0.0.0.0", 11555);
 }
 
@@ -56,5 +58,23 @@ const std::vector<Observer *> &Game::getObservers() const {
 
 const GameConfig &Game::getGameConfig() const {
     return _gameConfig;
+}
+
+void Game::sendGameInfo() {
+    sendPackageToObservers(new GameInfoPackage(this));
+}
+
+void Game::sendPackageToObservers(Package *package) {
+    for (auto observer : _observers) {
+        observer->send(package);
+    }
+}
+
+void Game::onConnectionClosed(TcpSocket *client) {
+
+}
+
+void Game::onDataReady(TcpSocket *client, nlohmann::json &json) {
+
 }
 
