@@ -30,3 +30,7 @@ void LightCrossbowMetadata::fillAttributes(std::vector<CardMetadata::CardAttribu
     attributes.push_back(CardAttribute::LongRange);
     attributes.push_back(CardAttribute::Piercing);
 }
+
+int LightCrossbow::getTypeId() const {
+    return 102;
+}

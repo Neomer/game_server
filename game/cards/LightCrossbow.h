@@ -2,17 +2,18 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_LONGSWORD_H
-#define WEBSOCKETS_LONGSWORD_H
+#ifndef WEBSOCKETS_LIGHTCROSSBOW_H
+#define WEBSOCKETS_LIGHTCROSSBOW_H
 
 #include "WeaponCard.h"
 
-class LongSword : public WeaponCard
+class LightCrossbow : public WeaponCard
 {
-
+public:
+    int getTypeId() const override;
 };
 
-class LongSwordMetadata : public WeaponCardMetadata
+class LightCrossbowMetadata : public WeaponCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
@@ -28,4 +29,4 @@ protected:
 };
 
 
-#endif //WEBSOCKETS_LONGSWORD_H
+#endif //WEBSOCKETS_LIGHTCROSSBOW_H

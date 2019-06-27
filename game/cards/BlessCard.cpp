@@ -14,3 +14,4 @@ CardMetadata::CardType BlessCardMetadata::getCardType() const
 {
     return CardMetadata::CardType::Blessing;
 }
+

@@ -15,6 +15,10 @@ EvilDetection::~EvilDetection()
 
 }
 
+int EvilDetection::getTypeId() const {
+    return 1;
+}
+
 std::shared_ptr<Card> EvilDetectionMetadata::createInstance() const
 {
     return std::shared_ptr<Card>(new EvilDetection());

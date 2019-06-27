@@ -30,3 +30,7 @@ void LongSwordMetadata::fillAttributes(std::vector<CardMetadata::CardAttribute> 
     attributes.push_back(CardAttribute::ShortRange);
     attributes.push_back(CardAttribute::Slashing);
 }
+
+int LongSword::getTypeId() const {
+    return 100;
+}

@@ -8,12 +8,16 @@
 #include <memory>
 #include <string_view>
 #include <vector>
+#include "../../json.hpp"
 #include "Metadata.h"
 
 class Card
 {
 public:
     virtual ~Card();
+
+    virtual int getTypeId() const = 0;
+
 };
 
 class CardMetadata : public Metadata

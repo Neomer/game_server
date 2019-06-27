@@ -10,6 +10,10 @@ HealCard::HealCard() :
 
 }
 
+int HealCard::getTypeId() const {
+    return 0;
+}
+
 HealCardMetadata::HealCardMetadata() :
         SpellCardMetadata()
 {

@@ -2,17 +2,18 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_ENERGYBOLT_H
-#define WEBSOCKETS_ENERGYBOLT_H
+#ifndef WEBSOCKETS_SLING_H
+#define WEBSOCKETS_SLING_H
 
-#include "SpellCard.h"
+#include "WeaponCard.h"
 
-class EnergyBolt : public SpellCard
+class Sling : public WeaponCard
 {
-
+public:
+    int getTypeId() const override;
 };
 
-class EnergyBoltMetadata : public SpellCardMetadata
+class SlingMetadata : public WeaponCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
@@ -28,4 +29,4 @@ protected:
 };
 
 
-#endif //WEBSOCKETS_ENERGYBOLT_H
+#endif //WEBSOCKETS_SLING_H

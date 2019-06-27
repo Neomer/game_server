@@ -2,17 +2,18 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_AMPLIFICATION_H
-#define WEBSOCKETS_AMPLIFICATION_H
+#ifndef WEBSOCKETS_ENERGYBOLT_H
+#define WEBSOCKETS_ENERGYBOLT_H
 
 #include "SpellCard.h"
 
-class Amplification : public SpellCard
+class EnergyBolt : public SpellCard
 {
-
+public:
+    int getTypeId() const override;
 };
 
-class AmplificationMetadata : public SpellCardMetadata
+class EnergyBoltMetadata : public SpellCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
@@ -27,4 +28,5 @@ protected:
     void fillAttributes(std::vector<CardMetadata::CardAttribute> &attributes) override;
 };
 
-#endif //WEBSOCKETS_AMPLIFICATION_H
+
+#endif //WEBSOCKETS_ENERGYBOLT_H

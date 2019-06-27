@@ -2,17 +2,18 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_LIGHTCROSSBOW_H
-#define WEBSOCKETS_LIGHTCROSSBOW_H
+#ifndef WEBSOCKETS_DIVINATION_H
+#define WEBSOCKETS_DIVINATION_H
 
-#include "WeaponCard.h"
+#include "SpellCard.h"
 
-class LightCrossbow : public WeaponCard
+class Divination : public SpellCard
 {
-
+public:
+    int getTypeId() const override;
 };
 
-class LightCrossbowMetadata : public WeaponCardMetadata
+class DivinationMetadata : public SpellCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
@@ -23,9 +24,11 @@ public:
 
     int TypeId() const override;
 
+    DivinationMetadata();
+
 protected:
     void fillAttributes(std::vector<CardMetadata::CardAttribute> &attributes) override;
 };
 
 
-#endif //WEBSOCKETS_LIGHTCROSSBOW_H
+#endif //WEBSOCKETS_DIVINATION_H

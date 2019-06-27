@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 #include "CardMetadataProvider.h"
-#include "Card.h"
+#include "cards/Card.h"
 #include "../Logger.h"
 
 using namespace std::string_literals;
@@ -50,14 +50,14 @@ void CardMetadataProvider::registerMetadata(CardMetadata *metadata)
 }
 
 // Spells
-#include "HealCard.h"
-#include "EvilDetection.h"
-#include "FindTraps.h"
-#include "Divination.h"
-#include "EnergyBolt.h"
-#include "Amplification.h"
+#include "cards/HealCard.h"
+#include "cards/EvilDetection.h"
+#include "cards/FindTraps.h"
+#include "cards/Divination.h"
+#include "cards/EnergyBolt.h"
+#include "cards/Amplification.h"
 // Weapons
-#include "LongSword.h"
+#include "cards/LongSword.h"
 
 void CardMetadataProvider::init()
 {

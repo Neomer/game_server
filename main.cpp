@@ -4,9 +4,9 @@
 #include "Sockets.h"
 #include "Logger.h"
 
-#include "game/Card.h"
+#include "game/cards/Card.h"
 #include "game/CardMetadataProvider.h"
-#include "game/HandTakableCard.h"
+#include "game/cards/HandTakableCard.h"
 
 int main()
 {

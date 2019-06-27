@@ -12,6 +12,7 @@ class HealCard : public SpellCard
 public:
     HealCard();
 
+    int getTypeId() const override;
 };
 
 class HealCardMetadata : public SpellCardMetadata

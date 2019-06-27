@@ -30,3 +30,7 @@ void SlingMetadata::fillAttributes(std::vector<CardMetadata::CardAttribute> &att
     attributes.push_back(CardAttribute::LongRange);
     attributes.push_back(CardAttribute::Crushing);
 }
+
+int Sling::getTypeId() const {
+    return 101;
+}

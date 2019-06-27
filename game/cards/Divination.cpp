@@ -36,3 +36,7 @@ void DivinationMetadata::fillAttributes(std::vector<CardMetadata::CardAttribute>
     attributes.push_back(CardAttribute::Charms);
     attributes.push_back(CardAttribute::Faith);
 }
+
+int Divination::getTypeId() const {
+    return 3;
+}

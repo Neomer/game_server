@@ -16,6 +16,10 @@ FindTraps::~FindTraps()
 
 }
 
+int FindTraps::getTypeId() const {
+    return 2;
+}
+
 std::shared_ptr<Card> FindTrapsMetadata::createInstance() const
 {
     return std::shared_ptr<Card>(new FindTraps());

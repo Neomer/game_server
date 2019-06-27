@@ -30,3 +30,7 @@ int AmplificationMetadata::TypeId() const
 {
     return 5;
 }
+
+int Amplification::getTypeId() const {
+    return 5;
+}

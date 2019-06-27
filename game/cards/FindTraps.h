@@ -13,6 +13,8 @@ public:
     ~FindTraps() override;
 
     FindTraps();
+
+    int getTypeId() const override;
 };
 
 class FindTrapsMetadata : public SpellCardMetadata

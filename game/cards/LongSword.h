@@ -2,17 +2,18 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_DIVINATION_H
-#define WEBSOCKETS_DIVINATION_H
+#ifndef WEBSOCKETS_LONGSWORD_H
+#define WEBSOCKETS_LONGSWORD_H
 
-#include "SpellCard.h"
+#include "WeaponCard.h"
 
-class Divination : public SpellCard
+class LongSword : public WeaponCard
 {
-
+public:
+    int getTypeId() const override;
 };
 
-class DivinationMetadata : public SpellCardMetadata
+class LongSwordMetadata : public WeaponCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
@@ -23,11 +24,9 @@ public:
 
     int TypeId() const override;
 
-    DivinationMetadata();
-
 protected:
     void fillAttributes(std::vector<CardMetadata::CardAttribute> &attributes) override;
 };
 
 
-#endif //WEBSOCKETS_DIVINATION_H
+#endif //WEBSOCKETS_LONGSWORD_H

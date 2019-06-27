@@ -2,36 +2,30 @@
 // Created by kir on 26.06.19.
 //
 
-#ifndef WEBSOCKETS_EVILDETECTION_H
-#define WEBSOCKETS_EVILDETECTION_H
+#ifndef WEBSOCKETS_AMPLIFICATION_H
+#define WEBSOCKETS_AMPLIFICATION_H
 
 #include "SpellCard.h"
 
-class EvilDetection : public SpellCard
+class Amplification : public SpellCard
 {
 public:
-    EvilDetection();
-
-    ~EvilDetection() override;
-
+    int getTypeId() const override;
 };
 
-class EvilDetectionMetadata : public SpellCardMetadata
+class AmplificationMetadata : public SpellCardMetadata
 {
 public:
     std::shared_ptr<Card> createInstance() const override;
-
-    int TypeId() const override;
 
     std::string_view getCardName() const override;
 
     bool isBeginnerLevel() const override;
 
-    EvilDetectionMetadata();
+    int TypeId() const override;
 
 protected:
     void fillAttributes(std::vector<CardMetadata::CardAttribute> &attributes) override;
 };
 
-
-#endif //WEBSOCKETS_EVILDETECTION_H
+#endif //WEBSOCKETS_AMPLIFICATION_H

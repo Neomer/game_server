@@ -6,7 +6,7 @@
 #define WEBSOCKETS_ROLE_H
 
 #include <string>
-#include "../json.hpp"
+#include "../../json.hpp"
 
 class Role
 {

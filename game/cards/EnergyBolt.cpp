@@ -31,3 +31,7 @@ void EnergyBoltMetadata::fillAttributes(std::vector<CardMetadata::CardAttribute>
     attributes.push_back(CardAttribute::Attack);
     attributes.push_back(CardAttribute::Energy);
 }
+
+int EnergyBolt::getTypeId() const {
+    return 4;
+}
