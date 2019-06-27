@@ -8,7 +8,7 @@
 #include "ClientConnectionDispatcher.h"
 #include "TcpSocket.h"
 #include "Sockets.h"
-#include "Logger.h"
+#include "../Logger.h"
 
 using namespace std::string_literals;
 
@@ -22,7 +22,7 @@ ClientConnectionDispatcher::~ClientConnectionDispatcher()
 
 }
 
-void ClientConnectionDispatcher::onConnectionAccepted(TcpSocket *client)
+void ClientConnectionDispatcher::onConnectionAccepted(const Server *server, TcpSocket *client)
 {
     std::lock_guard lock(_clientsVectorMutex);
     _clients.push_back(client);

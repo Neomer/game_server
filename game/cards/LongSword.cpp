@@ -6,7 +6,7 @@
 
 std::shared_ptr<Card> LongSwordMetadata::createInstance() const
 {
-    return std::shared_ptr<Card>(new WeaponCard());
+    return std::shared_ptr<Card>(new LongSword());
 }
 
 std::string_view LongSwordMetadata::getCardName() const

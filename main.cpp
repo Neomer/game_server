@@ -1,12 +1,9 @@
+#include "network/Sockets.h"
 #include <iostream>
-#include "Server.h"
-#include "ClientConnectionDispatcher.h"
-#include "Sockets.h"
 #include "Logger.h"
-
-#include "game/cards/Card.h"
 #include "game/CardMetadataProvider.h"
-#include "game/cards/HandTakableCard.h"
+#include "game/Game.h"
+
 
 int main()
 {
@@ -16,14 +13,16 @@ int main()
         throw std::runtime_error("Winsock initialization failed!");
     }
 #endif
-
+    // Инициализируем метаданные карт
     CardMetadataProvider::getInstance().init();
 
-    ClientConnectionDispatcher dispatcher;
+    GameConfig cfg;
+    cfg.setGameKey("hello world");
+    cfg.setModeratorKey("god mode");
+    cfg.setMaxPlayersCount(3);
 
-    Server srv;
-    srv.setOnConnectionAcceptedListener(&dispatcher);
-    srv.listen("0.0.0.0", 11555);
+    Game game(std::move(cfg));
+    game.begin();
 
     char cmd;
     while (true)
@@ -34,8 +33,6 @@ int main()
             break;
         }
     }
-
-    dispatcher.close();
 
 #ifdef _WIN32
     WSACleanup();

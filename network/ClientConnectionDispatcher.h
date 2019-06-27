@@ -22,7 +22,7 @@ public:
 
     void close();
 
-    void onConnectionAccepted(TcpSocket *client) override;
+    void onConnectionAccepted(const Server *server, TcpSocket *client) override;
 
     void onDataReady(TcpSocket *client, nlohmann::json &json) override;
 

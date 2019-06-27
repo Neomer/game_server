@@ -7,7 +7,7 @@
 #include "Server.h"
 #include "TcpSocket.h"
 #include "IConnectionAcceptedListener.h"
-#include "Logger.h"
+#include "../Logger.h"
 
 Server::Server() :
     _listeningRun{ false },
@@ -43,7 +43,7 @@ void Server::connectionAwaitingProc()
     while (_listeningRun) {
         auto socket = accept(_socketDescriptor, &addr, &len);
         if (_connectionAcceptedListener != nullptr && socket >= 0) {
-            _connectionAcceptedListener->onConnectionAccepted(new TcpSocket(socket));
+            _connectionAcceptedListener->onConnectionAccepted(this, createSocket(socket));
         }
     }
     Logger::getInstace().log("Server::connectionAwaitingProc() - Thread finished");
@@ -56,8 +56,27 @@ void Server::setOnConnectionAcceptedListener(IConnectionAcceptedListener *listen
 
 Server::~Server()
 {
+    close();
+}
+
+void Server::close() {
     _listeningRun = false;
+
+#ifdef _WIN32
+    shutdown(_socketDescriptor, 0);
+    closesocket(_socketDescriptor);
+#endif
+
+#ifdef __linux__
+    // TODO: Закрытие сокета для Linux
+#endif
+
     if (_connectionAwaitThread.joinable())  {
         _connectionAwaitThread.join();
     }
+
+}
+
+TcpSocket *Server::createSocket(int clientSocket) {
+    return new TcpSocket(clientSocket);
 }

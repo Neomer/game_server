@@ -1,0 +1,8 @@
+//
+// Created by vinokurov on 27.06.2019.
+//
+
+#ifndef WEBSOCKETS_INFINITYVECTOR_H
+#define WEBSOCKETS_INFINITYVECTOR_H
+
+#endif //WEBSOCKETS_INFINITYVECTOR_H

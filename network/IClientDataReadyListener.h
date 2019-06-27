@@ -5,7 +5,7 @@
 #ifndef WEBSOCKETS_ICLIENTDATAREADYLISTENER_H
 #define WEBSOCKETS_ICLIENTDATAREADYLISTENER_H
 
-#include "json.hpp"
+#include "../json.hpp"
 
 class TcpSocket;
 

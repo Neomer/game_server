@@ -8,12 +8,12 @@
 #include <unistd.h>
 #include <iomanip>
 #include <chrono>
-#include "json.hpp"
+#include "../json.hpp"
 #include "Sockets.h"
 #include "TcpSocket.h"
 #include "IClientDataReadyListener.h"
 #include "IClientConnectionClosedListener.h"
-#include "Logger.h"
+#include "../Logger.h"
 
 #define BUFFER_SIZE     1024
 
@@ -91,10 +91,10 @@ void TcpSocket::writeDataProc() {
         return;
     }
     std::mutex lockMtx;
-    std::unique_lock lock(lockMtx);
+    std::unique_lock uniq(lockMtx);
     Logger::getInstace().log("write thread start");
     while (_run.load()) {
-        _writeCondVar.wait(lock);
+        _writeCondVar.wait(uniq);
         if (!_dataForSend.empty()) {
             std::lock_guard lock(_queueMutex);
             _dataForSendCopy.swap(_dataForSend);
@@ -102,7 +102,7 @@ void TcpSocket::writeDataProc() {
         while (!_dataForSendCopy.empty()) {
             auto message = _dataForSendCopy.front().dump();
 #ifdef _WIN32
-            auto sent = send(_socket, message.c_str(), message.size(), 0);
+            send(_socket, message.c_str(), message.size(), 0);
 #endif
 
 #ifdef __linux__

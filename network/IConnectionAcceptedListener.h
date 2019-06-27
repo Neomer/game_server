@@ -7,11 +7,13 @@
 
 class TcpSocket;
 
+class Server;
+
 class IConnectionAcceptedListener
 {
 public:
 
-    virtual void onConnectionAccepted(TcpSocket *client) = 0;
+    virtual void onConnectionAccepted(const Server *server, TcpSocket *client) = 0;
 };
 
 

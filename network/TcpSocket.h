@@ -10,7 +10,7 @@
 #include <atomic>
 #include <condition_variable>
 #include <queue>
-#include "json.hpp"
+#include "../json.hpp"
 
 class IClientDataReadyListener;
 

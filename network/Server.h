@@ -12,16 +12,23 @@
 
 class IConnectionAcceptedListener;
 
+class TcpSocket;
+
 class Server
 {
 public:
-    Server();
+    explicit Server();
 
     virtual ~Server();
+
+    void close();
 
     void listen(std::string_view ip, uint16_t port);
 
     void setOnConnectionAcceptedListener(IConnectionAcceptedListener *listener);
+
+protected:
+    virtual TcpSocket *createSocket(int clientSocket);
 
 private:
     int _socketDescriptor;
