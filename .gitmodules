@@ -1,3 +1,6 @@
 [submodule "modules/cppcodec"]
 	path = modules/cppcodec
 	url = https://github.com/tplgy/cppcodec.git
+[submodule "modules/SHA256"]
+	path = modules/SHA256
+	url = https://github.com/okdshin/PicoSHA2.git
