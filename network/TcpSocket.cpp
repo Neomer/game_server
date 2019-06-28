@@ -67,10 +67,13 @@ void TcpSocket::readDataProc()
             Logger::getInstace().log(std::to_string(len) + " bytes received");
             if (_dataReadyListener != nullptr) {
                 try {
-                    buffer[len] = 0;
-                    prepareRawData(&buffer_ptr);
-                    nlohmann::json jDoc = nlohmann::json::parse(buffer_ptr);
-                    _dataReadyListener->onDataReady(this, jDoc);
+                    size_t size = len;
+                    prepareRawData(&buffer_ptr, &size);
+                    if (size > 0) {
+                        buffer[size] = 0;
+                        nlohmann::json jDoc = nlohmann::json::parse(buffer_ptr);
+                        _dataReadyListener->onDataReady(this, jDoc);
+                    }
                 }
                 catch (nlohmann::json::parse_error &ex)
                 {
@@ -102,13 +105,7 @@ void TcpSocket::writeDataProc() {
         }
         while (!_dataForSendCopy.empty()) {
             auto message = _dataForSendCopy.front().dump();
-#ifdef _WIN32
-            send(_socket, message.c_str(), message.size(), 0);
-#endif
-
-#ifdef __linux__
-            auto sent = ::write(_socket, message.c_str(), message.size());
-#endif
+            write(message.c_str(), message.size());
             _dataForSendCopy.pop();
         }
     }
@@ -133,8 +130,8 @@ void TcpSocket::write(nlohmann::json &json) {
     _writeCondVar.notify_one();
 }
 
-void TcpSocket::prepareRawData(char **buffer) {
-    *buffer = strstr(*buffer, "\r\n\r\n") + 4;
+void TcpSocket::prepareRawData(char **buffer, size_t *size) {
+
 }
 
 void TcpSocket::close()
@@ -160,3 +157,12 @@ void TcpSocket::write(Package *package) {
     delete package;
 }
 
+void TcpSocket::write(const char *data, size_t size) {
+#ifdef _WIN32
+    send(_socket, data, size, 0);
+#endif
+
+#ifdef __linux__
+    auto sent = ::write(_socket, data, size);
+#endif
+}

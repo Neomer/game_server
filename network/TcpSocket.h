@@ -36,7 +36,9 @@ public:
     void setOnConnectionClosedListener(IClientConnectionClosedListener *listener);
 
 protected:
-    virtual void prepareRawData(char **buffer);
+    virtual void prepareRawData(char **buffer, size_t *size);
+
+    virtual void write(const char *data, size_t size);
 
 private:
     int _socket;

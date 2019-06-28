@@ -7,3 +7,7 @@
 Package::Package() {
 
 }
+
+Package::~Package() {
+
+}

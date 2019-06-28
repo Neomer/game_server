@@ -58,10 +58,12 @@ void CardMetadataProvider::registerMetadata(CardMetadata *metadata)
 #include "cards/Amplification.h"
 // Weapons
 #include "cards/LongSword.h"
+#include "cards/Sling.h"
+#include "cards/LightCrossbow.h"
 
 void CardMetadataProvider::init()
 {
-    Logger::getInstace().log("Инициализация метаданных карт");
+    Logger::getInstace().log("Start cards metadata initialization");
 
     registerMetadata(new HealCardMetadata());
     registerMetadata(new EvilDetectionMetadata());
@@ -70,10 +72,12 @@ void CardMetadataProvider::init()
     registerMetadata(new EnergyBoltMetadata());
     registerMetadata(new AmplificationMetadata());
     registerMetadata(new LongSwordMetadata());
+    registerMetadata(new SlingMetadata());
+    registerMetadata(new LightCrossbowMetadata());
 
     for (auto metadata : _metadataVector) {
         metadata->load();
     }
 
-    Logger::getInstace().log("Инициализация метаданных карт закончена. Всего метаданных зарегистрировано: "s + std::to_string(_metadataVector.size()));
+    Logger::getInstace().log("Initialization finished. Total cards metadata count: "s + std::to_string(_metadataVector.size()));
 }

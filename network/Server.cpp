@@ -42,7 +42,12 @@ void Server::connectionAwaitingProc()
     ::listen(_socketDescriptor, 10);
     while (_listeningRun) {
         auto socket = accept(_socketDescriptor, nullptr, nullptr);
-        if (_connectionAcceptedListener != nullptr && socket > 0 && socket != INVALID_SOCKET) {
+        if (_connectionAcceptedListener != nullptr
+            && socket > 0
+#ifdef _WIN32
+            && socket != INVALID_SOCKET
+#endif
+            ) {
             _connectionAcceptedListener->onConnectionAccepted(this, createSocket(socket));
         }
     }

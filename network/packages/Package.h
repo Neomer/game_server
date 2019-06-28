@@ -11,6 +11,8 @@ class Package {
 public:
     Package();
 
+    virtual ~Package();
+
     virtual void compile(nlohmann::json &json) const = 0;
 
 };

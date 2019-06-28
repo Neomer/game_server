@@ -15,8 +15,22 @@ public:
 
     void write(nlohmann::json &json) override;
 
+private:
+    enum class ChannelState {
+        Open,   // Подключение открыто, но клиент не прислал запрос на установку канала связи
+        Ready   // Канал связи открыт
+    };
+    ChannelState _state;
+
+    enum class DataType
+    {
+        Data,
+        Text,
+        Binary
+    };
+
 protected:
-    void prepareRawData(char **buffer) override;
+    void prepareRawData(char **buffer, size_t *size) override;
 };
 
 
