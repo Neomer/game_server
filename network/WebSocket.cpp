@@ -45,7 +45,6 @@ void WebSocket::prepareRawData(char **buffer, size_t *size) {
         picosha2::hash256(unbasedKey.begin(), unbasedKey.end(), std::begin(hashBuffer), std::end(hashBuffer), 256);
         basedAnswerKey = cppcodec::base64_rfc4648::encode(hashBuffer, 32);
 
-
         *size = 0;
         auto msg = "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
                    "Upgrade: WebSocket\r\n"
